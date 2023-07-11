@@ -1,9 +1,13 @@
 <?php
 
+use App\Http\Controllers\BlogAjaxController;
+use App\Http\Controllers\BlogController;
+use App\Http\Controllers\BlogDetailController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ResumeController;
+use App\Models\BlogDetail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,6 +28,8 @@ Route::get('/', [HomeController::class, 'page'])->name('home');
 Route::get('/contact', [ContactController::class, 'page'])->name('contact');
 Route::get('/resume', [ResumeController::class, 'page'])->name('resume');
 Route::get('/project', [ProjectController::class, 'page'])->name('project');
+Route::get('/blogs', [BlogController::class, 'index'])->name('blogs');
+Route::get('/blogs/{id}', [BlogDetailController::class, 'index'])->name('blog');
 
 
 
@@ -37,3 +43,8 @@ Route::get('/educations', [ResumeController::class, 'allEducations']);
 Route::get('/skills', [ResumeController::class, 'skills']);
 Route::get('/languages', [ResumeController::class, 'languages']);
 Route::get('/projects', [ProjectController::class, 'projects']);
+
+
+// Blog Data
+// Route::get('/short-blogs', [BlogAjaxController::class, 'sortBlogs']);   // Short Blogs
+// Route::get('/blogs-details/{id}', [BlogAjaxController::class, 'singleBLog']);   // Full Blogs

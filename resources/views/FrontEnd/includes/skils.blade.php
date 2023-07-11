@@ -1,7 +1,7 @@
 <section>
     <!-- Skillset Card-->
     <div class="card shadow border-0 rounded-4 mb-5">
-        <div class="card-body p-5">
+        <div class="card-body p-5" >
             <!-- Professional skills list-->
             <div class="mb-5">
                 <div class="d-flex align-items-center mb-4">
@@ -12,21 +12,11 @@
                     <h3 class="fw-bolder mb-0"><span class="text-gradient d-inline">Professional
                             Skills</span></h3>
                 </div>
-                <div class="row row-cols-1 row-cols-md-3 mb-4">
-                    <div class="col mb-4 mb-md-0">
-                        <div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">SEO/SEM
-                            Marketing</div>
-                    </div>
-                    <div class="col mb-4 mb-md-0">
-                        <div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">Statistical
-                            Analysis</div>
-                    </div>
-                    <div class="col">
-                        <div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">Web Development
-                        </div>
-                    </div>
+                <div class="row row-cols-1 row-cols-md-3 mb-4" id="skills-list">
+                    
+                    
                 </div>
-                <div class="row row-cols-1 row-cols-md-3">
+                {{-- <div class="row row-cols-1 row-cols-md-3">
                     <div class="col mb-4 mb-md-0">
                         <div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">Network Security
                         </div>
@@ -39,7 +29,7 @@
                         <div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">User Interface
                             Design</div>
                     </div>
-                </div>
+                </div> --}}
             </div>
             <!-- Languages list-->
             <div class="mb-0">
@@ -50,29 +40,51 @@
                     </div>
                     <h3 class="fw-bolder mb-0"><span class="text-gradient d-inline">Languages</span></h3>
                 </div>
-                <div class="row row-cols-1 row-cols-md-3 mb-4">
-                    <div class="col mb-4 mb-md-0">
-                        <div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">HTML</div>
-                    </div>
-                    <div class="col mb-4 mb-md-0">
-                        <div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">CSS</div>
-                    </div>
-                    <div class="col">
-                        <div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">JavaScript</div>
-                    </div>
+                <div class="row row-cols-1 row-cols-md-3 mb-4" id="langs-list">
+                    
+                   
                 </div>
-                <div class="row row-cols-1 row-cols-md-3">
-                    <div class="col mb-4 mb-md-0">
-                        <div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">Python</div>
-                    </div>
-                    <div class="col mb-4 mb-md-0">
-                        <div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">Ruby</div>
-                    </div>
-                    <div class="col">
-                        <div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">Node.js</div>
-                    </div>
-                </div>
+                
             </div>
         </div>
     </div>
 </section>
+
+<script>
+    getSkills()
+    async function getSkills() {
+        try {
+            let response = await axios.get('/api/skills');
+            data = response.data;
+            // console.log(data);
+            data.forEach(item => {
+                document.getElementById('skills-list').innerHTML += (`
+                <div class="col mb-4 mb-md-0 pb-4">
+                        <div class="d-flex align-items-center bg-light rounded-4 p-3  h-100">${item['name']}</div>
+                    </div>
+                `);
+            });
+        } catch (error) {
+
+        }
+    }
+
+
+    getLangs()
+    async function getLangs() {
+        try {
+            let response = await axios.get('/api/languages');
+            data = response.data;
+            // console.log(data);
+            data.forEach(item => {
+                document.getElementById('langs-list').innerHTML += (`
+                <div class="col mb-4 mb-md-0 pb-4">
+                        <div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">${item['name']}</div>
+                    </div>
+                `);
+            });
+        } catch (error) {
+
+        }
+    }
+</script>

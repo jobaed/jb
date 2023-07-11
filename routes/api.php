@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ResumeController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\BlogAjaxController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,3 +33,8 @@ Route::get('/educations', [ResumeController::class, 'allEducations']);
 Route::get('/skills', [ResumeController::class, 'skills']);
 Route::get('/languages', [ResumeController::class, 'languages']);
 Route::get('/projects', [ProjectController::class, 'projects']);
+
+
+// Blog Data
+Route::get('/blogs', [BlogAjaxController::class, 'sortBlogs']);   // Short Blogs
+Route::get('/blogs-details/{id}', [BlogAjaxController::class, 'singleBLog'])->name('blogs');   // Full Blogs

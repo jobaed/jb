@@ -100,13 +100,13 @@
                 <h2 class="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white">Comments <span
                         id="commentCount"></span></h2>
             </div>
-            <form class="mb-6">
+            <form class="mb-6" id="contactForm">
                 <div
                     class="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
                     <label for="comment" class="sr-only">Your comment</label>
                     <textarea id="comment" rows="6"
                         class="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none dark:text-white dark:placeholder-gray-400 dark:bg-gray-800"
-                        placeholder="Write a comment..." required></textarea>
+                        placeholder="Write a comment..."></textarea>
                 </div>
                 <button type="submit"
                     class="inline-flex   items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 ring-1 ring-gray-200  focus:ring-gray-200 dark:focus:ring-gray-900 hover:bg-primary-800">
@@ -274,6 +274,48 @@
                 document.getElementById('noCommentLabel').innerHTML = 'No Comment Here';
             }
         }
+
+        let contactForm = document.getElementById('contactForm');
+        contactForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            let comment = document.getElementById('comment').value;
+            console.log(comment);
+
+            if (comment.length === 0) {
+                alert('Name is required');
+            } else {
+                let dataComment = {
+                    userComment: comment,
+                    blogId: id
+                }
+                // let URL = '/commentRequest';
+                // let result = await axios.post(URL, data);
+
+                // if (result.status === 200 && result.data === 1) {
+                //     alert('Your request has been submitted successfully');
+                //     contactForm.reset();
+                // } else {
+                //     alert('Something went wrong')
+                //     console.error(error);
+                // }
+
+
+
+                axios.post('/commentRequest', dataComment)
+                    .then(function(response) {
+                        // Handle the success response
+                        console.log(response.data);
+                        alert("Comment Successfully Added");
+                        location.reload();
+                        
+                    })
+                    .catch(function(error) {
+                        // Handle the error response
+                        console.error(error);
+                    });
+            }
+        })
     </script>
 </body>
 

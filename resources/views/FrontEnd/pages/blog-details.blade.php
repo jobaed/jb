@@ -289,18 +289,6 @@
                     userComment: comment,
                     blogId: id
                 }
-                // let URL = '/commentRequest';
-                // let result = await axios.post(URL, data);
-
-                // if (result.status === 200 && result.data === 1) {
-                //     alert('Your request has been submitted successfully');
-                //     contactForm.reset();
-                // } else {
-                //     alert('Something went wrong')
-                //     console.error(error);
-                // }
-
-
 
                 axios.post('/commentRequest', dataComment)
                     .then(function(response) {
